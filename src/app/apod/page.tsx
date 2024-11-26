@@ -47,27 +47,53 @@ export default function APODPage() {
   };
 
   if (!data) {
-    return <p className="text-center mt-20">Loading...</p>;
+    return <p className="text-center mt-20 text-white">Loading...</p>;
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-800">{data.title}</h1>
-      <p className="text-gray-600">{data.date}</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white font-sans">
+      {/* 제목 */}
+      <h1 className="text-4xl font-extrabold text-blue-300 drop-shadow-lg mb-2">
+        {data.title}
+      </h1>
+      <p className="text-gray-400 text-sm">{data.date}</p>
+
+      {/* 이미지 */}
       <img
         src={data.url}
         alt={data.title}
-        className="mt-4 max-w-md rounded shadow"
+        className="mt-6 max-w-lg rounded-lg shadow-lg border border-blue-500"
       />
-      <p className="mt-4 text-gray-800">{translatedText || data.explanation}</p>
+
+      {/* 설명 */}
+      <p className="mt-6 text-center px-4 sm:px-10 leading-relaxed text-lg">
+        {translatedText || data.explanation}
+      </p>
+
+      {/* 번역 버튼 */}
       {!translatedText && (
         <button
           onClick={translateText}
-          className="mt-6 px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="mt-6 px-8 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200"
         >
           번역하기
         </button>
       )}
+
+      {/* 푸터 */}
+      <footer className="mt-10 text-sm text-gray-500">
+        <p>
+          Data provided by NASA's{" "}
+          <a
+            href="https://apod.nasa.gov/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-500 underline"
+          >
+            Astronomy Picture of the Day (APOD)
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }
